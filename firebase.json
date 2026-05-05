@@ -9,7 +9,7 @@
     "redirects": [
       {
         "source": "/qr",
-        "destination": "https://www.linkedin.com/in/alessiobernardini",
+        "destination": "https://alessiobernardini.dev/",
         "type": 302
       }
     ],

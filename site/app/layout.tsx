@@ -15,12 +15,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Alessio Bernardini — Full Stack Developer",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   description:
-    "Full Stack Developer specializzato in Mobility, Agritech, FinTech. Ex game programmer. Disponibile per consulenze freelance.",
+    "Full Stack Developer. Sviluppo software, siti web, gestionali e automazioni per aziende e professionisti. Ascoli Piceno, disponibile da remoto.",
   openGraph: {
     title: "Alessio Bernardini — Full Stack Developer",
     description:
-      "Costruisco software che gira in produzione, non slide.",
+      "Sviluppo software, siti web, gestionali e automazioni per aziende e professionisti.",
     url: "https://alessiobernardini.dev",
     siteName: "Alessio Bernardini",
     locale: "it_IT",
@@ -29,7 +33,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Alessio Bernardini — Full Stack Developer",
-    description: "Costruisco software che gira in produzione, non slide.",
+    description:
+      "Sviluppo software, siti web, gestionali e automazioni per aziende e professionisti.",
   },
 };
 
@@ -43,7 +48,7 @@ export default function RootLayout({
       lang="it"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="bg-[#0a0a0a] min-h-screen">
+      <body className="bg-white min-h-screen">
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

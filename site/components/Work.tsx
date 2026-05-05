@@ -1,6 +1,5 @@
-'use client'
+﻿'use client'
 
-import { useState } from 'react'
 import { useLanguage } from '@/lib/language-context'
 import { useT } from '@/lib/translations'
 import { projects } from '@/lib/content'
@@ -9,133 +8,79 @@ import { useInView } from '@/lib/hooks'
 export default function Work() {
   const { lang } = useLanguage()
   const t = useT(lang)
-  const [expanded, setExpanded] = useState<string | null>(null)
   const { ref, visible } = useInView(0.05)
 
   return (
     <section
-      id="work"
+      id="progetti"
       ref={ref}
-      className={`py-24 px-6 border-t border-[#1f1f1f] section-fade ${visible ? 'visible' : ''}`}
+      className={`py-20 md:py-28 px-6 bg-slate-50 section-fade ${visible ? 'visible' : ''}`}
     >
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-12">
-          <p className="font-mono text-[#00ff88] text-sm mb-2">03 /</p>
-          <h2 className="text-3xl font-bold text-white">{t.work.sectionTitle}</h2>
-          <p className="text-[#555] mt-2">{t.work.sectionSubtitle}</p>
-        </div>
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          {t.work.sectionTitle}
+        </h2>
+        <p className="text-lg text-slate-500 mb-12">
+          {t.work.sectionSubtitle}
+        </p>
 
-        <div className="space-y-3">
-          {projects.map((project, i) => {
-            const isOpen = expanded === project.id
-            return (
-              <div
-                key={project.id}
-                className={`border rounded-xl overflow-hidden transition-colors duration-200 cursor-pointer ${
-                  isOpen
-                    ? 'border-[#00ff88]/30 bg-[#0c0c0c]'
-                    : 'border-[#1f1f1f] bg-[#0a0a0a] hover:border-[#2a2a2a]'
-                }`}
-                onClick={() => setExpanded(isOpen ? null : project.id)}
-              >
-                {/* Header row */}
-                <div className="p-6 flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1 flex-wrap">
-                      <span className="font-mono text-xs text-[#333]">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <h3 className="text-white font-semibold">{project.name}</h3>
-                      {project.highlight && (
-                        <span className="font-mono text-xs px-2 py-0.5 rounded-full bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20">
-                          {project.highlight[lang]}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-[#444] font-mono flex-wrap">
-                      <span>{project.role[lang]}</span>
-                      <span>·</span>
-                      <span>{project.period[lang]}</span>
-                    </div>
-                  </div>
-                  <span
-                    className={`text-[#444] transition-transform duration-300 mt-0.5 select-none text-xl leading-none shrink-0 ${
-                      isOpen ? 'rotate-45' : ''
-                    }`}
-                  >
-                    +
-                  </span>
+        <div className="space-y-6">
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              className="bg-white rounded-xl border border-slate-200 p-6 md:p-8 hover:shadow-md transition-shadow"
+            >
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm text-slate-500">
+                    {project.period[lang]} &middot; {project.role[lang]}
+                  </p>
                 </div>
-
-                {/* Expanded content */}
-                {isOpen && (
-                  <div className="px-6 pb-6 border-t border-[#1a1a1a]">
-                    <div className="pt-6 space-y-6">
-                      {/* Problem */}
-                      <div>
-                        <p className="font-mono text-xs text-[#444] uppercase tracking-widest mb-2">
-                          {t.work.problem}
-                        </p>
-                        <p className="text-[#888] italic">
-                          &ldquo;{project.problem[lang]}&rdquo;
-                        </p>
-                      </div>
-
-                      {/* Built */}
-                      <div>
-                        <p className="font-mono text-xs text-[#444] uppercase tracking-widest mb-3">
-                          {t.work.built}
-                        </p>
-                        <ul className="space-y-2">
-                          {project.built[lang].map((item, j) => (
-                            <li
-                              key={j}
-                              className="flex items-start gap-3 text-[#888] text-sm"
-                            >
-                              <span className="text-[#00ff88] font-mono mt-0.5 shrink-0">
-                                →
-                              </span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Stack */}
-                      <div>
-                        <p className="font-mono text-xs text-[#444] uppercase tracking-widest mb-3">
-                          {t.work.stack}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.stack.map(tech => (
-                            <span
-                              key={tech}
-                              className="font-mono text-xs px-2.5 py-1 rounded-md bg-[#111] border border-[#1f1f1f] text-[#777]"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Link */}
-                      {project.url && (
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={e => e.stopPropagation()}
-                          className="inline-flex items-center gap-2 font-mono text-sm text-[#00ff88] hover:text-white transition-colors"
-                        >
-                          {t.work.viewLive} ↗
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors shrink-0"
+                  >
+                    {t.work.viewProject}
+                    <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path d="M7 17L17 7M17 7H7M17 7v10" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
                 )}
               </div>
-            )
-          })}
+
+              <p className="text-base text-slate-600 mb-4">
+                {project.description[lang]}
+              </p>
+
+              <ul className="space-y-2 mb-6">
+                {project.results[lang].map((result, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="mt-0.5 text-blue-500 shrink-0">
+                      <polyline points="20 6 9 17 4 12" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {result}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs font-medium text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

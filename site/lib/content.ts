@@ -1,24 +1,69 @@
 import type { Lang } from './language-context'
 
 export const GITHUB_USERNAME = 'alessiobernardini'
-
 export const CAL_URL = 'https://cal.eu/alessiobernardini'
 
-// --- NOW data (edit these manually when things change) ---
-export const nowData = {
-  building: {
-    it: 'alessiobernardini.dev — questo sito',
-    en: 'alessiobernardini.dev — this site',
+export const contactInfo = {
+  phone: '+39 334 713 2869',
+  email: 'alebernardini95@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/alessiobernardini',
+  linkedinLabel: 'linkedin.com/in/alessiobernardini',
+  location: {
+    it: 'Ascoli Piceno · Disponibile da remoto',
+    en: 'Ascoli Piceno · Available remotely',
   },
-  reading: {
-    it: 'The Pragmatic Programmer — Hunt & Thomas',
-    en: 'The Pragmatic Programmer — Hunt & Thomas',
-  },
-  available: true,
-  bookedUntil: '', // e.g. '2025-09-01' when not available
 }
 
-// --- PROJECTS ---
+export const available = true
+
+// --- SERVIZI ---
+export interface Service {
+  id: string
+  icon: 'globe' | 'layout' | 'zap' | 'link'
+  title: Record<Lang, string>
+  description: Record<Lang, string>
+}
+
+export const services: Service[] = [
+  {
+    id: 'web',
+    icon: 'globe',
+    title: { it: 'Siti web', en: 'Websites' },
+    description: {
+      it: 'Siti vetrina, landing page e portali web. Design responsive, veloci e ottimizzati per i motori di ricerca.',
+      en: 'Showcase sites, landing pages and web portals. Responsive design, fast and SEO optimized.',
+    },
+  },
+  {
+    id: 'gestionali',
+    icon: 'layout',
+    title: { it: 'Gestionali', en: 'Management Software' },
+    description: {
+      it: 'Applicazioni web su misura per gestire dati, processi e operazioni aziendali. Dashboard, report e integrazioni.',
+      en: 'Custom web applications to manage data, processes and business operations. Dashboards, reports and integrations.',
+    },
+  },
+  {
+    id: 'automazioni',
+    icon: 'zap',
+    title: { it: 'Automazioni', en: 'Automations' },
+    description: {
+      it: 'Automatizzazione di flussi di lavoro ripetitivi. Import dati, notifiche, sincronizzazione tra sistemi.',
+      en: 'Automation of repetitive workflows. Data import, notifications, cross-system synchronization.',
+    },
+  },
+  {
+    id: 'api',
+    icon: 'link',
+    title: { it: 'API / AI', en: 'API / AI' },
+    description: {
+      it: 'Integrazioni con servizi esterni, API REST e intelligenza artificiale. Connessione tra piattaforme e sistemi.',
+      en: 'Integration with external services, REST APIs and artificial intelligence. Cross-platform connections.',
+    },
+  },
+]
+
+// --- PROGETTI ---
 export interface Project {
   id: string
   year: string
@@ -26,69 +71,63 @@ export interface Project {
   role: Record<Lang, string>
   name: string
   url?: string
-  problem: Record<Lang, string>
-  built: Record<Lang, string[]>
+  description: Record<Lang, string>
+  results: Record<Lang, string[]>
   stack: string[]
-  highlight?: Record<Lang, string>
 }
 
 export const projects: Project[] = [
   {
     id: 'zero',
-    year: '2024',
-    period: { it: '2024 – In corso', en: '2024 – Present' },
+    year: '2026',
+    period: { it: '2026', en: '2026' },
     role: { it: 'Lead Developer & Architect', en: 'Lead Developer & Architect' },
     name: 'Zero — Personal Finance Manager',
     url: 'https://zerofinance.it',
-    problem: {
-      it: 'Volevo un finance manager che capisse le mie transazioni, non solo le elencasse.',
-      en: "I wanted a finance manager that understood my transactions, not just listed them.",
+    description: {
+      it: 'Web app per la gestione delle finanze personali, disponibile su Google Play Store e prossimamente su Apple App Store. Architettura serverless con AI integrata.',
+      en: 'Personal finance web app, available on Google Play Store and coming soon to Apple App Store. Serverless architecture with integrated AI.',
     },
-    built: {
+    results: {
       it: [
-        'AI Chat finanziaria con streaming SSE integrata con Gemini 2.5 Flash, analisi su 500+ transazioni',
-        'Import automatico estratti conto (CSV parsing) protetto da test unitari Vitest',
-        'Dashboard interattiva per tracciamento investimenti, asset e budget mensili via Recharts',
-        'PWA con service worker, notifiche push (Firebase Cloud Messaging) e auth biometrica/PIN',
+        'Disponibile su Google Play Store · Apple App Store in arrivo',
+        'Chat finanziaria AI con streaming SSE integrata con Gemini 2.5 Flash',
+        'Import automatico estratti conto con test unitari Vitest',
+        'Dashboard interattiva per investimenti, asset e budget mensili',
+        'Notifiche push e autenticazione biometrica',
       ],
       en: [
-        'Financial AI Chat with SSE streaming via Gemini 2.5 Flash, analyzing 500+ transactions',
-        'Automatic bank statement import (CSV parsing) with Vitest unit tests',
-        'Interactive dashboard for tracking investments, assets, and monthly budgets via Recharts',
-        'PWA with service worker, push notifications (Firebase Cloud Messaging) and biometric/PIN auth',
+        'Available on Google Play Store · Apple App Store coming soon',
+        'AI financial chat with SSE streaming via Gemini 2.5 Flash',
+        'Automatic bank statement import with Vitest unit tests',
+        'Interactive dashboard for investments, assets and monthly budgets',
+        'Push notifications and biometric authentication',
       ],
     },
-    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Firebase', 'Tailwind CSS', 'Gemini 2.5'],
-    highlight: {
-      it: '500+ tx analizzate con AI',
-      en: '500+ transactions analyzed by AI',
-    },
+    stack: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Tailwind CSS', 'Gemini AI'],
   },
   {
     id: 'vinolab',
-    year: '2023',
-    period: { it: '2023 – In corso', en: '2023 – Present' },
-    role: {
-      it: 'Lead Developer & Architect (Freelance)',
-      en: 'Lead Developer & Architect (Freelance)',
-    },
+    year: '2026',
+    period: { it: '2025 – 2026', en: '2025 – 2026' },
+    role: { it: 'Lead Developer & Architect', en: 'Lead Developer & Architect' },
     name: 'Vinolab.pro',
     url: 'https://vinolab.pro',
-    problem: {
-      it: "Un'azienda vinicola aveva bisogno di una piattaforma SaaS per gestire l'analisi chimica del vino a pagamento.",
-      en: 'A wine company needed a SaaS platform to manage chemical wine analysis as a paid service.',
+    description: {
+      it: "Piattaforma SaaS per l'analisi chimica del vino, sviluppata per un'azienda del settore.",
+      en: 'SaaS platform for chemical wine analysis, built for an industry company.',
     },
-    built: {
+    results: {
       it: [
-        'Piattaforma SaaS full-stack con modello di business a sottoscrizione via Stripe',
-        'Frontend Angular + backend AdonisJS con API REST e database MySQL',
-        'Deployment completo con Docker e Kubernetes (k8s)',
+        'Piattaforma SaaS con modello a sottoscrizione via Stripe',
+        'Frontend Angular + backend AdonisJS con API REST',
+        'Deployment con Docker e Kubernetes',
         'Ottimizzazione rete via Cloudflare',
       ],
       en: [
-        'Full-stack SaaS platform with subscription business model via Stripe',
-        'Angular frontend + AdonisJS backend with REST APIs and MySQL database',
-        'Full deployment with Docker and Kubernetes (k8s)',
+        'SaaS platform with Stripe subscription model',
+        'Angular frontend + AdonisJS backend with REST APIs',
+        'Deployment with Docker and Kubernetes',
         'Network optimization via Cloudflare',
       ],
     },
@@ -100,20 +139,20 @@ export const projects: Project[] = [
     period: { it: 'Maggio 2023 – In corso', en: 'May 2023 – Present' },
     role: { it: 'Full Stack Developer', en: 'Full Stack Developer' },
     name: 'Acontel — Agritech 4.0',
-    problem: {
-      it: 'Costruire il backend per sistemi IoT agricoli complessi con flussi dati in tempo reale.',
-      en: 'Build the backend for complex agricultural IoT systems with real-time data streams.',
+    description: {
+      it: 'Sviluppo backend per sistemi IoT agricoli con flussi dati in tempo reale.',
+      en: 'Backend development for agricultural IoT systems with real-time data streams.',
     },
-    built: {
+    results: {
       it: [
-        "Lead backend development in ambito Agritech 4.0, ciclo end-to-end dall'analisi al deploy",
-        'API REST e moduli di prodotto complessi con focus su scalabilità e prestazioni',
-        'Integrazione sistemi IoT e data-modeling per ottimizzazione flussi dati agricoli',
+        "Lead backend development, ciclo end-to-end dall'analisi al deploy",
+        'API REST e moduli di prodotto con focus su scalabilità',
+        'Integrazione sistemi IoT e data-modeling per flussi dati agricoli',
       ],
       en: [
-        'Lead backend development in Agritech 4.0, full end-to-end cycle from analysis to deploy',
-        'REST APIs and complex product modules focused on scalability and performance',
-        'IoT system integration and data-modeling for agricultural data flow optimization',
+        'Lead backend development, full end-to-end cycle from analysis to deploy',
+        'REST APIs and product modules focused on scalability',
+        'IoT system integration and data-modeling for agricultural data flows',
       ],
     },
     stack: ['Node.js', 'TypeScript', 'Prisma', 'Firebase', 'Auth0', 'Vue 3', 'MySQL'],
@@ -124,75 +163,31 @@ export const projects: Project[] = [
     period: { it: 'Ottobre 2021 – In corso', en: 'October 2021 – Present' },
     role: { it: 'Full Stack Developer', en: 'Full Stack Developer' },
     name: 'OnMobility — Mobilità Elettrica',
-    problem: {
-      it: "Sviluppare l'app e il gestionale per una piattaforma di mobilità elettrica da zero.",
-      en: 'Build the app and backoffice for an electric mobility platform from scratch.',
+    description: {
+      it: 'Applicazione e gestionale interno per una piattaforma di mobilità elettrica.',
+      en: 'Application and internal management system for an electric mobility platform.',
     },
-    built: {
+    results: {
       it: [
-        'Sviluppo dell\'applicazione "OnMobility" e del gestionale interno',
+        'Sviluppo dell\'app "OnMobility" e del gestionale interno',
         'Backend con API REST e integrazione database MySQL',
-        '4+ anni di iterazione continua su prodotto live',
       ],
       en: [
-        'Development of the "OnMobility" application and internal management system',
+        'Development of the "OnMobility" app and internal management system',
         'Backend with REST APIs and MySQL database integration',
-        '4+ years of continuous iteration on a live product',
       ],
     },
     stack: ['Node.js', 'MySQL', 'REST APIs'],
-    highlight: {
-      it: '4+ anni in produzione',
-      en: '4+ years in production',
-    },
   },
 ]
 
-// --- STACK ---
-export interface StackItem {
-  name: string
-  lastUsedIn?: string
+// --- STATS ---
+export const stats = {
+  years: '8+',
+  projects: '6+',
+  sectors: {
+    it: ['Mobility', 'Agritech', 'FinTech', 'Wine'],
+    en: ['Mobility', 'Agritech', 'FinTech', 'Wine'],
+  },
 }
 
-export const stackCategories: {
-  key: 'daily' | 'tested' | 'quests'
-  items: StackItem[]
-}[] = [
-  {
-    key: 'daily',
-    items: [
-      { name: 'TypeScript', lastUsedIn: 'Zero' },
-      { name: 'Next.js', lastUsedIn: 'Zero' },
-      { name: 'React', lastUsedIn: 'Zero' },
-      { name: 'Firebase', lastUsedIn: 'Zero' },
-      { name: 'Tailwind CSS', lastUsedIn: 'Zero' },
-      { name: 'Node.js', lastUsedIn: 'Acontel' },
-      { name: 'Gemini AI', lastUsedIn: 'Zero' },
-    ],
-  },
-  {
-    key: 'tested',
-    items: [
-      { name: 'Angular', lastUsedIn: 'Vinolab' },
-      { name: 'Vue 3', lastUsedIn: 'Acontel' },
-      { name: 'AdonisJS', lastUsedIn: 'Vinolab' },
-      { name: 'Prisma', lastUsedIn: 'Acontel' },
-      { name: 'MySQL', lastUsedIn: 'OnMobility' },
-      { name: 'MongoDB', lastUsedIn: 'Zero' },
-      { name: 'Docker', lastUsedIn: 'Vinolab' },
-      { name: 'Kubernetes', lastUsedIn: 'Vinolab' },
-      { name: 'Auth0', lastUsedIn: 'Acontel' },
-      { name: 'Stripe', lastUsedIn: 'Vinolab' },
-      { name: 'Cloudflare', lastUsedIn: 'Vinolab' },
-    ],
-  },
-  {
-    key: 'quests',
-    items: [
-      { name: 'C++', lastUsedIn: 'AIV' },
-      { name: 'C#', lastUsedIn: 'Unity' },
-      { name: 'Unity', lastUsedIn: 'Piliffo' },
-      { name: 'Vitest', lastUsedIn: 'Zero' },
-    ],
-  },
-]
