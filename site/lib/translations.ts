@@ -101,7 +101,7 @@ const translations: Record<Lang, Translation> = {
       cta: 'Prenota una call',
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} Alessio Bernardini — P.IVA`,  
+      copyright: `© ${new Date().getFullYear()} Alessio Bernardini — P.IVA 02607070444`,
     },
   },
   en: {
@@ -154,7 +154,7 @@ const translations: Record<Lang, Translation> = {
       cta: 'Book a call',
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} Alessio Bernardini`,
+      copyright: `© ${new Date().getFullYear()} Alessio Bernardini — VAT 02607070444`,
     },
   },
 }
