@@ -14,6 +14,7 @@ export default function Nav() {
     { href: '#servizi', label: t.nav.services },
     { href: '#chi-sono', label: t.nav.about },
     { href: '#progetti', label: t.nav.work },
+    { href: '#siti', label: t.nav.sites },
     { href: '#contatti', label: t.nav.contact },
   ]
 

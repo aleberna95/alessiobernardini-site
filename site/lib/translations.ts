@@ -5,6 +5,7 @@ export interface Translation {
     services: string
     about: string
     work: string
+    sites: string
     contact: string
     cta: string
   }
@@ -45,6 +46,11 @@ export interface Translation {
     location: string
     cta: string
   }
+  sites: {
+    sectionTitle: string
+    sectionSubtitle: string
+    visit: string
+  }
   footer: {
     copyright: string
   }
@@ -56,6 +62,7 @@ const translations: Record<Lang, Translation> = {
       services: 'Servizi',
       about: 'Chi sono',
       work: 'Progetti',
+      sites: 'Siti',
       contact: 'Contatti',
       cta: 'Contattami',
     },
@@ -100,6 +107,11 @@ const translations: Record<Lang, Translation> = {
       location: 'Sede',
       cta: 'Prenota una call',
     },
+    sites: {
+      sectionTitle: 'Siti',
+      sectionSubtitle: 'Siti web che ho realizzato',
+      visit: 'Visita il sito',
+    },
     footer: {
       copyright: `© ${new Date().getFullYear()} Alessio Bernardini — P.IVA 02607070444`,
     },
@@ -109,6 +121,7 @@ const translations: Record<Lang, Translation> = {
       services: 'Services',
       about: 'About',
       work: 'Projects',
+      sites: 'Sites',
       contact: 'Contact',
       cta: 'Get in touch',
     },
@@ -152,6 +165,11 @@ const translations: Record<Lang, Translation> = {
       linkedin: 'LinkedIn',
       location: 'Location',
       cta: 'Book a call',
+    },
+    sites: {
+      sectionTitle: 'Sites',
+      sectionSubtitle: 'Websites I have built',
+      visit: 'Visit site',
     },
     footer: {
       copyright: `© ${new Date().getFullYear()} Alessio Bernardini — VAT 02607070444`,

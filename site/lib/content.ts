@@ -181,6 +181,38 @@ export const projects: Project[] = [
   },
 ]
 
+// --- SITI ---
+export interface Site {
+  id: string
+  name: string
+  url: string
+  description: Record<Lang, string>
+  year: string
+}
+
+export const sites: Site[] = [
+  {
+    id: 'alessiobernardini',
+    name: 'alessiobernardini.dev',
+    url: 'https://alessiobernardini.dev',
+    description: {
+      it: 'Sito personale e portfolio professionale.',
+      en: 'Personal site and professional portfolio.',
+    },
+    year: '2026',
+  },
+  {
+    id: 'colleiano',
+    name: 'colleiano.it',
+    url: 'https://colleiano.it',
+    description: {
+      it: 'Sito web per il Comune di Colleiano.',
+      en: 'Website for the Municipality of Colleiano.',
+    },
+    year: '2026',
+  },
+]
+
 // --- STATS ---
 export const stats = {
   years: '8+',
