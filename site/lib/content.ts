@@ -107,33 +107,6 @@ export const projects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Tailwind CSS', 'Gemini AI'],
   },
   {
-    id: 'vinolab',
-    year: '2026',
-    period: { it: '2025 – 2026', en: '2025 – 2026' },
-    role: { it: 'Lead Developer & Architect', en: 'Lead Developer & Architect' },
-    name: 'Vinolab.pro',
-    url: 'https://vinolab.pro',
-    description: {
-      it: "Piattaforma SaaS per l'analisi chimica del vino, sviluppata per un'azienda del settore.",
-      en: 'SaaS platform for chemical wine analysis, built for an industry company.',
-    },
-    results: {
-      it: [
-        'Piattaforma SaaS con modello a sottoscrizione via Stripe',
-        'Frontend Angular + backend AdonisJS con API REST',
-        'Deployment con Docker e Kubernetes',
-        'Ottimizzazione rete via Cloudflare',
-      ],
-      en: [
-        'SaaS platform with Stripe subscription model',
-        'Angular frontend + AdonisJS backend with REST APIs',
-        'Deployment with Docker and Kubernetes',
-        'Network optimization via Cloudflare',
-      ],
-    },
-    stack: ['Angular', 'AdonisJS', 'Node.js', 'TypeScript', 'MySQL', 'Docker', 'Kubernetes', 'Stripe'],
-  },
-  {
     id: 'acontel',
     year: '2023',
     period: { it: 'Maggio 2023 – In corso', en: 'May 2023 – Present' },
