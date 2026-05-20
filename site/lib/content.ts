@@ -85,19 +85,19 @@ export const projects: Project[] = [
     name: 'Zero — Personal Finance Manager',
     url: 'https://zerofinance.it',
     description: {
-      it: 'Web app per la gestione delle finanze personali, disponibile su Google Play Store e prossimamente su Apple App Store. Architettura serverless con AI integrata.',
-      en: 'Personal finance web app, available on Google Play Store and coming soon to Apple App Store. Serverless architecture with integrated AI.',
+      it: 'App mobile e web per la gestione delle finanze personali, disponibile su Google Play Store e prossimamente su Apple App Store. Accessibile anche via web per gli utenti registrati. Architettura serverless con AI integrata.',
+      en: 'Mobile and web app for personal finance management, available on Google Play Store and coming soon to Apple App Store. Also accessible via web for registered users. Serverless architecture with integrated AI.',
     },
     results: {
       it: [
-        'Disponibile su Google Play Store · Apple App Store in arrivo',
+        'Disponibile su Google Play Store · Apple App Store in arrivo · Accesso web per utenti registrati',
         'Chat finanziaria AI con streaming SSE integrata con Gemini 2.5 Flash',
         'Import automatico estratti conto con test unitari Vitest',
         'Dashboard interattiva per investimenti, asset e budget mensili',
         'Notifiche push e autenticazione biometrica',
       ],
       en: [
-        'Available on Google Play Store · Apple App Store coming soon',
+        'Available on Google Play Store · Apple App Store coming soon · Web access for registered users',
         'AI financial chat with SSE streaming via Gemini 2.5 Flash',
         'Automatic bank statement import with Vitest unit tests',
         'Interactive dashboard for investments, assets and monthly budgets',
@@ -105,6 +105,35 @@ export const projects: Project[] = [
       ],
     },
     stack: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Tailwind CSS', 'Gemini AI'],
+  },
+  {
+    id: 'vinifera',
+    year: '2026',
+    period: { it: '2026', en: '2026' },
+    role: { it: 'Lead Developer & Architect', en: 'Lead Developer & Architect' },
+    name: 'Vinifera — CRM per Laboratorio Enologico',
+    url: 'https://crm.viniferastudioenologico.it/',
+    description: {
+      it: 'CRM full-stack per laboratorio di analisi enologiche. Gestione clienti, preventivi con PDF personalizzati, campioni in lavorazione, pacchetti prepagati e rate di pagamento.',
+      en: 'Full-stack CRM for a wine analysis laboratory. Client management, quotes with custom PDFs, samples in progress, prepaid packages and payment instalments.',
+    },
+    results: {
+      it: [
+        'Gestione completa di clienti, preventivi e campioni in lavorazione',
+        'Generazione PDF personalizzati per preventivi e documenti',
+        'Dashboard con aggregazioni dati in tempo reale',
+        'Pacchetti prepagati e gestione rate di pagamento',
+        'Notifiche automatiche via Telegram ed email (Resend)',
+      ],
+      en: [
+        'Full management of clients, quotes and samples in progress',
+        'Custom PDF generation for quotes and documents',
+        'Dashboard with real-time data aggregations',
+        'Prepaid packages and payment instalment management',
+        'Automatic notifications via Telegram and email (Resend)',
+      ],
+    },
+    stack: ['Next.js 15', 'TypeScript', 'Firebase', 'Vercel', 'shadcn/ui', 'react-pdf', 'Resend'],
   },
   {
     id: 'acontel',
