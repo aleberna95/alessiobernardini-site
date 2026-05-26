@@ -394,26 +394,6 @@ function OfferCard({
         {offer.shortDescription}
       </p>
 
-      {/* Prices */}
-      {(setupLabel || monthlyLabel) && (
-        <div className="mb-4 space-y-1.5">
-          {setupLabel && (
-            <div className="flex items-baseline gap-2">
-              <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">{t.offers.setupLabel}</span>
-              <span className="text-lg font-bold text-slate-900 tabular-nums">{setupLabel}</span>
-            </div>
-          )}
-          {monthlyLabel && (
-            <div className="flex items-baseline gap-2">
-              <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
-                {t.offers.recurring}{offer.minimumDurationMonths != null ? ` ${getDurationLabel(offer.minimumDurationMonths, t)}` : ''}
-              </span>
-              <span className="text-lg font-bold text-slate-900 tabular-nums">{monthlyLabel}</span>
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Discount badge */}
       {offer.discountLabel && (
         <span className="mb-4 inline-block self-start rounded-full bg-green-50 border border-green-200 px-2.5 py-0.5 text-xs font-medium text-green-700">
@@ -470,11 +450,31 @@ function OfferCard({
         </ul>
       )}
 
+      {/* Prices - discrete and at the bottom */}
+      {(setupLabel || monthlyLabel) && (
+        <div className="mt-auto pt-3 border-t border-slate-100 mb-3">
+          <div className="flex items-center justify-between gap-3 text-xs text-slate-500">
+            {setupLabel && (
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-medium">{t.offers.setupLabel}:</span>
+                <span className="font-semibold text-slate-700 tabular-nums">{setupLabel}</span>
+              </div>
+            )}
+            {monthlyLabel && (
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-medium">{t.offers.recurring}:</span>
+                <span className="font-semibold text-slate-700 tabular-nums">{monthlyLabel}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* CTA */}
       <button
         type="button"
         onClick={onRequestInfo}
-        className="mt-auto inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+        className="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
       >
         {offer.ctaLabel ?? t.offers.requestInfo}
       </button>
