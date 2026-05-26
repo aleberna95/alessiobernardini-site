@@ -19,6 +19,7 @@ interface PublicOffer {
   setupPriceToCents: number | null
   monthlyPriceFromCents: number | null
   monthlyPriceToCents: number | null
+  discountPercentage: number | null
   discountLabel: string | null
   minimumDurationMonths: number | null
   features: string[]
@@ -39,8 +40,29 @@ function centsToDisplay(cents: number): string {
   }).format(cents / 100)
 }
 
+function applyDiscount(cents: number, discountPercentage: number): number {
+  return Math.round(cents * (1 - discountPercentage / 100))
+}
+
 function getSetupLabel(offer: PublicOffer, t: ReturnType<typeof useT>): string | null {
   if (offer.setupPriceFromCents == null) return null
+  
+  const from = offer.discountPercentage 
+    ? applyDiscount(offer.setupPriceFromCents, offer.discountPercentage)
+    : offer.setupPriceFromCents
+  
+  const to = offer.setupPriceToCents && offer.discountPercentage
+    ? applyDiscount(offer.setupPriceToCents, offer.discountPercentage)
+    : offer.setupPriceToCents
+  
+  return to != null
+    ? `${centsToDisplay(from)} – ${centsToDisplay(to)}`
+    : `${t.offers.from} ${centsToDisplay(from)}`
+}
+
+function getOriginalSetupLabel(offer: PublicOffer, t: ReturnType<typeof useT>): string | null {
+  if (!offer.discountPercentage || offer.setupPriceFromCents == null) return null
+  
   const from = centsToDisplay(offer.setupPriceFromCents)
   return offer.setupPriceToCents != null
     ? `${from} – ${centsToDisplay(offer.setupPriceToCents)}`
@@ -49,6 +71,23 @@ function getSetupLabel(offer: PublicOffer, t: ReturnType<typeof useT>): string |
 
 function getMonthlyLabel(offer: PublicOffer, t: ReturnType<typeof useT>): string | null {
   if (offer.monthlyPriceFromCents == null) return null
+  
+  const from = offer.discountPercentage
+    ? applyDiscount(offer.monthlyPriceFromCents, offer.discountPercentage)
+    : offer.monthlyPriceFromCents
+  
+  const to = offer.monthlyPriceToCents && offer.discountPercentage
+    ? applyDiscount(offer.monthlyPriceToCents, offer.discountPercentage)
+    : offer.monthlyPriceToCents
+  
+  return to != null
+    ? `${centsToDisplay(from)} – ${centsToDisplay(to)}${t.offers.perMonth}`
+    : `${t.offers.from} ${centsToDisplay(from)}${t.offers.perMonth}`
+}
+
+function getOriginalMonthlyLabel(offer: PublicOffer, t: ReturnType<typeof useT>): string | null {
+  if (!offer.discountPercentage || offer.monthlyPriceFromCents == null) return null
+  
   const from = centsToDisplay(offer.monthlyPriceFromCents)
   return offer.monthlyPriceToCents != null
     ? `${from} – ${centsToDisplay(offer.monthlyPriceToCents)}${t.offers.perMonth}`
@@ -367,6 +406,8 @@ function OfferCard({
 }) {
   const setupLabel = getSetupLabel(offer, t)
   const monthlyLabel = getMonthlyLabel(offer, t)
+  const originalSetupLabel = getOriginalSetupLabel(offer, t)
+  const originalMonthlyLabel = getOriginalMonthlyLabel(offer, t)
 
   return (
     <article
@@ -453,17 +494,27 @@ function OfferCard({
       {/* Prices - discrete and at the bottom */}
       {(setupLabel || monthlyLabel) && (
         <div className="mt-auto pt-3 border-t border-slate-100 mb-3">
-          <div className="flex items-center justify-between gap-3 text-xs text-slate-500">
+          <div className="flex items-center justify-between gap-3 text-xs">
             {setupLabel && (
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-medium">{t.offers.setupLabel}:</span>
-                <span className="font-semibold text-slate-700 tabular-nums">{setupLabel}</span>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-medium text-slate-500">{t.offers.setupLabel}:</span>
+                {originalSetupLabel && (
+                  <span className="text-[10px] text-slate-400 line-through tabular-nums">{originalSetupLabel}</span>
+                )}
+                <span className={`font-semibold tabular-nums ${offer.discountPercentage ? 'text-green-700' : 'text-slate-700'}`}>
+                  {setupLabel}
+                </span>
               </div>
             )}
             {monthlyLabel && (
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-medium">{t.offers.recurring}:</span>
-                <span className="font-semibold text-slate-700 tabular-nums">{monthlyLabel}</span>
+              <div className="flex flex-col gap-0.5 text-right">
+                <span className="font-medium text-slate-500">{t.offers.recurring}:</span>
+                {originalMonthlyLabel && (
+                  <span className="text-[10px] text-slate-400 line-through tabular-nums">{originalMonthlyLabel}</span>
+                )}
+                <span className={`font-semibold tabular-nums ${offer.discountPercentage ? 'text-green-700' : 'text-slate-700'}`}>
+                  {monthlyLabel}
+                </span>
               </div>
             )}
           </div>
