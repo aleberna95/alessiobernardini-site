@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/language-context";
@@ -13,6 +13,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   title: "Alessio Bernardini — Full Stack Developer",
   icons: {
@@ -21,12 +28,6 @@ export const metadata: Metadata = {
   },
   description:
     "Full Stack Developer. Sviluppo software, siti web, gestionali e automazioni per aziende e professionisti. Ascoli Piceno, disponibile da remoto.",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   openGraph: {
     title: "Alessio Bernardini — Full Stack Developer",
     description:
