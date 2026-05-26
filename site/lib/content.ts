@@ -19,21 +19,12 @@ export const available = true
 // --- SERVIZI ---
 export interface Service {
   id: string
-  icon: 'globe' | 'layout' | 'zap' | 'link'
+  icon: 'globe' | 'layout' | 'zap' | 'link' | 'smartphone'
   title: Record<Lang, string>
   description: Record<Lang, string>
 }
 
 export const services: Service[] = [
-  {
-    id: 'web',
-    icon: 'globe',
-    title: { it: 'Siti web', en: 'Websites' },
-    description: {
-      it: 'Siti vetrina, landing page e portali web. Design responsive, veloci e ottimizzati per i motori di ricerca.',
-      en: 'Showcase sites, landing pages and web portals. Responsive design, fast and SEO optimized.',
-    },
-  },
   {
     id: 'gestionali',
     icon: 'layout',
@@ -41,6 +32,24 @@ export const services: Service[] = [
     description: {
       it: 'Applicazioni web su misura per gestire dati, processi e operazioni aziendali. Dashboard, report e integrazioni.',
       en: 'Custom web applications to manage data, processes and business operations. Dashboards, reports and integrations.',
+    },
+  },
+  {
+    id: 'app',
+    icon: 'smartphone',
+    title: { it: 'App iOS · Android · Web', en: 'iOS · Android · Web Apps' },
+    description: {
+      it: 'Applicazioni mobile e progressive web app. Esperienza nativa su ogni dispositivo, sincronizzate col cloud.',
+      en: 'Mobile and progressive web apps. Native-like experience on every device, synced with the cloud.',
+    },
+  },
+  {
+    id: 'web',
+    icon: 'globe',
+    title: { it: 'Siti web', en: 'Websites' },
+    description: {
+      it: 'Siti vetrina, landing page e portali web. Design responsive, veloci e ottimizzati per i motori di ricerca.',
+      en: 'Showcase sites, landing pages and web portals. Responsive design, fast and SEO optimized.',
     },
   },
   {

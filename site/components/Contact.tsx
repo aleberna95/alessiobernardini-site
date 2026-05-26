@@ -1,8 +1,19 @@
 ﻿'use client'
 
+import { motion } from 'motion/react'
 import { useLanguage } from '@/lib/language-context'
 import { useT } from '@/lib/translations'
 import { contactInfo, CAL_URL } from '@/lib/content'
+
+const cardsContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+}
 
 export default function Contact() {
   const { lang } = useLanguage()
@@ -63,13 +74,20 @@ export default function Contact() {
           {t.contact.sectionSubtitle}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10"
+          variants={cardsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
           {items.map((item) => (
-            <div
+            <motion.div
               key={item.label}
-              className="flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200"
+              variants={cardVariants}
+              className="group flex items-start gap-4 p-5 bg-slate-50 rounded-xl border border-slate-200 hover:border-blue-200 transition-colors duration-200"
             >
-              <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-200">
                 {item.icon}
               </div>
               <div>
@@ -87,23 +105,38 @@ export default function Contact() {
                   <p className="text-base font-medium text-slate-900">{item.value}</p>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="text-center">
-          <a
+          <motion.a
             href={CAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -2 }}
+            transition={{ duration: 0.5 }}
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
           >
-            <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="group-hover:rotate-12 transition-transform duration-200"
+            >
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
             {t.contact.cta}
-          </a>
+          </motion.a>
         </div>
       </div>
     </section>
