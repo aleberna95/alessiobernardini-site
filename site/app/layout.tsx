@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   },
   description:
     "Full Stack Developer. Sviluppo software, siti web, gestionali e automazioni per aziende e professionisti. Ascoli Piceno, disponibile da remoto.",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   openGraph: {
     title: "Alessio Bernardini — Full Stack Developer",
     description:
