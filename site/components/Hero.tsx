@@ -55,13 +55,7 @@ export default function Hero() {
           {t.hero.headline.split('\n').map((line, i) => (
             <span key={i}>
               {i > 0 && <br />}
-              {i === 0 ? (
-                <span className="bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                  {line}
-                </span>
-              ) : (
-                line
-              )}
+              {line}
             </span>
           ))}
         </motion.h1>
@@ -82,24 +76,16 @@ export default function Hero() {
           {t.hero.services}
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTA */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex items-center justify-center"
         >
           <motion.a
-            href="#contatti"
-            whileHover={{ scale: 1.03, y: -1 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors w-full sm:w-auto"
-          >
-            {t.hero.ctaPrimary}
-          </motion.a>
-          <motion.a
-            href="#servizi"
+            href="#chi-sono"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors w-full sm:w-auto"
+            className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
           >
             {t.hero.ctaSecondary}
           </motion.a>

@@ -29,11 +29,10 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>('')
 
   const links = [
-    { href: '#servizi', label: t.nav.services },
     { href: '#chi-sono', label: t.nav.about },
     { href: '#progetti', label: t.nav.work },
     { href: '#siti', label: t.nav.sites },
-    { href: '#offerte', label: t.nav.offers },
+    { href: '#servizi', label: t.nav.services },
     { href: '#contatti', label: t.nav.contact },
   ]
 
@@ -108,14 +107,6 @@ export default function Nav() {
           >
             {lang === 'it' ? 'EN' : 'IT'}
           </button>
-
-          {/* CTA */}
-          <a
-            href="#contatti"
-            className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
-          >
-            {t.nav.cta}
-          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -180,20 +171,6 @@ export default function Nav() {
                   {link.label}
                 </motion.a>
               ))}
-              <motion.a
-                href="#contatti"
-                custom={links.length}
-                variants={mobileLinkVariants}
-                initial="hidden"
-                animate="visible"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleMobileClick('#contatti')
-                }}
-                className="block text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors py-2 touch-manipulation"
-              >
-                {t.nav.cta}
-              </motion.a>
             </div>
           </motion.div>
         )}
