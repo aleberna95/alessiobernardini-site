@@ -6,21 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:og": "node scripts/generate-og-image.mjs",
+    "verify:seo": "node scripts/verify-seo.mjs",
+    "verify:posthog": "node scripts/verify-posthog.mjs",
+    "build:check": "next build && node scripts/verify-seo.mjs",
+    "deploy": "next build && cd .. && firebase deploy --only hosting"
   },
   "dependencies": {
     "motion": "^12.40.0",
     "next": "16.2.4",
+    "posthog-js": "^1.398.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@napi-rs/canvas": "^1.0.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

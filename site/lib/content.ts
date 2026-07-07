@@ -2,6 +2,7 @@ import type { Lang } from './language-context'
 
 export const GITHUB_USERNAME = 'alessiobernardini'
 export const CAL_URL = 'https://cal.eu/alessiobernardini'
+export const WHATSAPP_URL = `https://wa.me/393347132869?text=${encodeURIComponent('Ciao Alessio, vorrei parlarti di un progetto.')}`
 
 export const contactInfo = {
   phone: '+39 334 713 2869',

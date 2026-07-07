@@ -1,0 +1,31 @@
+# Alessio Bernardini
+
+> Full Stack Developer freelance (P.IVA) basato ad Ascoli Piceno, Italia.
+> Disponibile per collaborazioni da remoto in tutta Italia.
+
+## Chi è
+Alessio Bernardini è un Full Stack Developer con oltre 8 anni di esperienza nello
+sviluppo di applicazioni web e architetture cloud. È specializzato in gestionali su
+misura, app mobile, automazioni e integrazioni API/AI. Opera con P.IVA (02607070444).
+
+## Servizi
+- Gestionali web su misura (dashboard, report, integrazioni)
+- App iOS, Android e web (PWA)
+- Siti web e landing page ottimizzati SEO
+- Automazioni di flussi di lavoro
+- Integrazioni API REST e Intelligenza Artificiale
+
+## Settori
+Mobility, Agritech, FinTech, SaaS enologico.
+
+## Progetti principali
+- Zero — Personal Finance Manager (app finanza personale con AI, Google Play)
+- Vinifera — CRM per laboratorio di analisi enologiche
+- Acontel — Backend Agritech 4.0 con IoT
+- OnMobility — App e gestionale per mobilità elettrica
+
+## Contatti
+- Sito: https://alessiobernardini.dev
+- Email: alebernardini95@gmail.com
+- LinkedIn: https://www.linkedin.com/in/alessiobernardini
+- GitHub: https://github.com/alessiobernardini

@@ -12,13 +12,22 @@ const containerVariants = {
   },
 }
 
+// Variante generica: fade + slide (no blur → compositing corretto)
 const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const },
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+}
+
+// H1 (LCP element): sempre visibile, solo slide-up — Lighthouse può misurare LCP subito
+const headlineVariants = {
+  hidden: { y: 24 },
+  visible: {
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 }
 
@@ -49,7 +58,7 @@ export default function Hero() {
 
         {/* Headline */}
         <motion.h1
-          variants={itemVariants}
+          variants={headlineVariants}
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 leading-tight mb-6"
         >
           {t.hero.headline.split('\n').map((line, i) => (
@@ -82,7 +91,7 @@ export default function Hero() {
           className="flex items-center justify-center"
         >
           <motion.a
-            href="#chi-sono"
+            href="#servizi"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"

@@ -89,6 +89,7 @@ export interface Translation {
     linkedin: string
     location: string
     cta: string
+    ctaNote: string
   }
   sites: {
     sectionTitle: string
@@ -113,7 +114,7 @@ const translations: Record<Lang, Translation> = {
     },
     hero: {
       headline: 'Sviluppo software\nper aziende e professionisti',
-      subheadline: 'Full Stack Developer · Consulente software · P.IVA',
+      subheadline: 'Alessio Bernardini — Full Stack Developer con P.IVA ad Ascoli Piceno, specializzato in gestionali, app e automazioni per aziende agritech, fintech e mobility.',
       services: 'Gestionali · App · Siti web · Automazioni · API / AI',
       ctaPrimary: 'Contattami',
       ctaSecondary: 'Scopri i servizi',
@@ -184,9 +185,9 @@ const translations: Record<Lang, Translation> = {
       sectionTitle: 'Chi sono',
       sectionSubtitle: 'Alessio Bernardini — Full Stack Developer',
       bio: [
-        'Full Stack Developer con esperienza consolidata nello sviluppo di applicazioni web e gestione di architetture cloud.',
-        "Specializzato in ambiti Mobility, Agritech e FinTech, con una forte propensione all'utilizzo di AI-Assisted Development per accelerare il ciclo di vita del software.",
-        'Disponibile per consulenze e progetti freelance tramite Partita IVA.',
+        'Alessio Bernardini è un Full Stack Developer con P.IVA ad Ascoli Piceno, con oltre 8 anni di esperienza nello sviluppo di applicazioni web e gestione di architetture cloud.',
+        "Specializzato nei settori Mobility, Agritech e FinTech, progetta e realizza gestionali su misura, app mobile e automazioni per aziende e professionisti. Forte propensione all'utilizzo di AI-Assisted Development per accelerare il ciclo di vita del software.",
+        'Disponibile per consulenze e progetti freelance tramite Partita IVA. Operativo da remoto in tutta Italia.',
       ],
       statsYears: 'Anni di esperienza',
       statsProjects: 'Progetti in produzione',
@@ -201,13 +202,14 @@ const translations: Record<Lang, Translation> = {
       viewProject: 'Visita il progetto',
     },
     contact: {
-      sectionTitle: 'Contatti',
-      sectionSubtitle: 'Raccontami il tuo progetto',
+      sectionTitle: 'Hai un progetto in mente?',
+      sectionSubtitle: 'Scrivimi, sono sempre disponibile a sentire nuove idee.',
       phone: 'Telefono',
       email: 'Email',
       linkedin: 'LinkedIn',
       location: 'Sede',
-      cta: 'Prenota una call',
+      cta: 'Scrivi su WhatsApp',
+      ctaNote: 'Di solito rispondo entro poche ore.',
     },
     sites: {
       sectionTitle: 'Siti',
@@ -230,7 +232,7 @@ const translations: Record<Lang, Translation> = {
     },
     hero: {
       headline: 'Software development\nfor businesses and professionals',
-      subheadline: 'Full Stack Developer · Software Consultant · Freelance',
+      subheadline: 'Alessio Bernardini — Full Stack Developer based in Ascoli Piceno, Italy, specialized in management software, apps and automations for agritech, fintech and mobility companies.',
       services: 'Management Software · Apps · Websites · Automations · API / AI',
       ctaPrimary: 'Get in touch',
       ctaSecondary: 'View services',
@@ -301,9 +303,9 @@ const translations: Record<Lang, Translation> = {
       sectionTitle: 'About',
       sectionSubtitle: 'Alessio Bernardini — Full Stack Developer',
       bio: [
-        'Full Stack Developer with solid experience building web applications and managing cloud architectures.',
-        'Specialized in Mobility, Agritech and FinTech, with a strong focus on AI-Assisted Development to accelerate the software lifecycle.',
-        'Available for freelance consulting and projects.',
+        'Alessio Bernardini is a Full Stack Developer based in Ascoli Piceno, Italy, with over 8 years of experience building web applications and managing cloud architectures.',
+        'Specialized in Mobility, Agritech and FinTech, he designs and builds custom management software, mobile apps and automations for businesses. Strong focus on AI-Assisted Development to accelerate the software lifecycle.',
+        'Available for freelance consulting and projects. Works remotely across Italy.',
       ],
       statsYears: 'Years of experience',
       statsProjects: 'Projects in production',
@@ -318,13 +320,14 @@ const translations: Record<Lang, Translation> = {
       viewProject: 'Visit project',
     },
     contact: {
-      sectionTitle: 'Contact',
-      sectionSubtitle: 'Tell me about your project',
+      sectionTitle: 'Have a project in mind?',
+      sectionSubtitle: "Get in touch \u2014 I'm always open to hearing new ideas.",
       phone: 'Phone',
       email: 'Email',
       linkedin: 'LinkedIn',
       location: 'Location',
-      cta: 'Book a call',
+      cta: 'Write on WhatsApp',
+      ctaNote: 'I usually reply within a few hours.',
     },
     sites: {
       sectionTitle: 'Sites',
