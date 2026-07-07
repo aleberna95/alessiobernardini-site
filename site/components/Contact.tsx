@@ -1,13 +1,62 @@
 ﻿'use client'
 
+import { useState } from 'react'
 import { motion } from 'motion/react'
+import posthog from 'posthog-js'
 import { useLanguage } from '@/lib/language-context'
 import { useT } from '@/lib/translations'
 import { contactInfo, WHATSAPP_URL } from '@/lib/content'
 
+const CRM_API_URL = process.env.NEXT_PUBLIC_CRM_API_URL ?? 'https://crm.alessiobernardini.dev'
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+
 export default function Contact() {
   const { lang } = useLanguage()
   const t = useT(lang)
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [company, setCompany] = useState('')
+  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setStatus('sending')
+    setErrorMessage('')
+
+    try {
+      const res = await fetch(`${CRM_API_URL}/api/public/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          company: company || undefined,
+          message: message || undefined,
+          source: 'alessiobernardini.dev',
+        }),
+      })
+
+      const json = await res.json()
+
+      if (!res.ok || !json.ok) {
+        setErrorMessage(json.error ?? t.leadForm.error)
+        setStatus('error')
+        return
+      }
+
+      setStatus('success')
+      posthog.capture('lead_submitted', { source: 'contact_form' })
+    } catch {
+      setErrorMessage(t.leadForm.error)
+      setStatus('error')
+    }
+  }
 
   const contactItems = [
     {
@@ -46,7 +95,7 @@ export default function Contact() {
   return (
     <section id="contatti" className="py-24 md:py-32 px-6 bg-slate-950">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* Left: headline + WhatsApp CTA */}
           <motion.div
@@ -83,9 +132,46 @@ export default function Contact() {
             </motion.a>
 
             <p className="mt-4 text-sm text-slate-500">{t.contact.ctaNote}</p>
+
+            {/* Contact info */}
+            <div className="mt-10 space-y-5">
+              {contactItems.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.25 + i * 0.08 }}
+                  className="group flex items-center gap-4"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-400 flex items-center justify-center shrink-0 group-hover:border-blue-500/40 group-hover:text-blue-400 transition-all duration-200">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">{item.label}</p>
+                    <a
+                      href={item.href}
+                      target={item.href.startsWith('http') ? '_blank' : undefined}
+                      rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="text-sm font-medium text-slate-200 hover:text-white transition-colors"
+                    >
+                      {item.value}
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+
+              <div className="pt-5 border-t border-white/10 flex items-center gap-3">
+                <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 shrink-0" aria-hidden="true" focusable="false">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p className="text-sm text-slate-500">{contactInfo.location[lang]}</p>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Right: contact info card */}
+          {/* Right: inline lead form */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -93,41 +179,141 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
-              <div className="space-y-7">
-                {contactItems.map((item, i) => (
+              <h3 className="text-xl font-bold text-white mb-1">{t.contact.formTitle}</h3>
+              <p className="text-sm text-slate-400 mb-6">{t.leadForm.subtitle}</p>
+
+              {status === 'success' ? (
+                <div className="text-center py-8">
                   <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.25 + i * 0.08 }}
-                    className="group flex items-center gap-4"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4"
                   >
-                    <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-slate-400 flex items-center justify-center shrink-0 group-hover:border-blue-500/40 group-hover:text-blue-400 transition-all duration-200">
-                      {item.icon}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-green-400" strokeLinecap="round" strokeLinejoin="round">
+                      <motion.path
+                        d="M20 6L9 17L4 12"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+                      />
+                    </svg>
+                  </motion.div>
+                  <h4 className="text-lg font-semibold text-white mb-1">{t.leadForm.success}</h4>
+                  <p className="text-sm text-slate-400">{t.leadForm.successMessage}</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-slate-300 mb-1">
+                      {t.leadForm.name} *
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      required
+                      minLength={2}
+                      maxLength={100}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder={t.leadForm.namePlaceholder}
+                      className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-slate-300 mb-1">
+                      {t.leadForm.email} *
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t.leadForm.emailPlaceholder}
+                      className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="contact-phone" className="block text-sm font-medium text-slate-300 mb-1">
+                        {t.leadForm.phone}
+                      </label>
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        maxLength={30}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder={t.leadForm.phonePlaceholder}
+                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-colors"
+                      />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">{item.label}</p>
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith('http') ? '_blank' : undefined}
-                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="text-sm font-medium text-slate-200 hover:text-white transition-colors"
-                      >
-                        {item.value}
-                      </a>
+                      <label htmlFor="contact-company" className="block text-sm font-medium text-slate-300 mb-1">
+                        {t.leadForm.company}
+                      </label>
+                      <input
+                        id="contact-company"
+                        type="text"
+                        maxLength={100}
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        placeholder={t.leadForm.companyPlaceholder}
+                        className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-colors"
+                      />
                     </div>
-                  </motion.div>
-                ))}
+                  </div>
 
-                <div className="pt-5 border-t border-white/10 flex items-center gap-3">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 shrink-0" aria-hidden="true" focusable="false">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <p className="text-sm text-slate-500">{contactInfo.location[lang]}</p>
-                </div>
-              </div>
+                  <div>
+                    <label htmlFor="contact-message" className="block text-sm font-medium text-slate-300 mb-1">
+                      {t.leadForm.message}
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      maxLength={1000}
+                      rows={3}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder={t.leadForm.messagePlaceholder}
+                      className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-colors resize-none"
+                    />
+                  </div>
+
+                  {status === 'error' && (
+                    <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed rounded-lg transition-colors"
+                  >
+                    {status === 'sending' && (
+                      <motion.svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      >
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                      </motion.svg>
+                    )}
+                    {status === 'sending' ? t.leadForm.sending : t.leadForm.send}
+                  </button>
+                </form>
+              )}
             </div>
           </motion.div>
 

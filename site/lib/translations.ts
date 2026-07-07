@@ -90,6 +90,7 @@ export interface Translation {
     location: string
     cta: string
     ctaNote: string
+    formTitle: string
   }
   sites: {
     sectionTitle: string
@@ -210,6 +211,7 @@ const translations: Record<Lang, Translation> = {
       location: 'Sede',
       cta: 'Scrivi su WhatsApp',
       ctaNote: 'Di solito rispondo entro poche ore.',
+      formTitle: 'Oppure scrivimi qui',
     },
     sites: {
       sectionTitle: 'Siti',
@@ -328,6 +330,7 @@ const translations: Record<Lang, Translation> = {
       location: 'Location',
       cta: 'Write on WhatsApp',
       ctaNote: 'I usually reply within a few hours.',
+      formTitle: 'Or write to me here',
     },
     sites: {
       sectionTitle: 'Sites',
