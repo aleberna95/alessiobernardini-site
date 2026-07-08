@@ -6,13 +6,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
-        "source": "/qr",
-        "destination": "https://alessiobernardini.dev/",
-        "type": 302
-      }
-    ],
     "headers": [
       {
         "source": "**/*.@(js|css|wasm|data)",
