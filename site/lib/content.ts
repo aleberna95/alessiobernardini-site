@@ -204,12 +204,12 @@ export interface Site {
 
 export const sites: Site[] = [
   {
-    id: 'alessiobernardini',
-    name: 'alessiobernardini.dev',
-    url: 'https://alessiobernardini.dev',
+    id: 'viniferastudioenologico',
+    name: 'viniferastudioenologico.it',
+    url: 'https://viniferastudioenologico.it',
     description: {
-      it: 'Sito personale e portfolio professionale.',
-      en: 'Personal site and professional portfolio.',
+      it: 'Sito web per il laboratorio di analisi enologiche Vinifera Studio.',
+      en: 'Website for the Vinifera Studio wine analysis laboratory.',
     },
     year: '2026',
   },
@@ -220,6 +220,16 @@ export const sites: Site[] = [
     description: {
       it: 'Sito web per il Comune di Colleiano.',
       en: 'Website for the Municipality of Colleiano.',
+    },
+    year: '2026',
+  },
+  {
+    id: 'alessiobernardini',
+    name: 'alessiobernardini.dev',
+    url: 'https://alessiobernardini.dev',
+    description: {
+      it: 'Sito personale e portfolio professionale.',
+      en: 'Personal site and professional portfolio.',
     },
     year: '2026',
   },
