@@ -110,7 +110,7 @@ function buildCells(): Cell[] {
 }
 
 export default function QrReveal({ destination }: { destination: string }) {
-  const cells = useMemo(buildCells, [])
+  const cells = useMemo(() => buildCells(), [])
   const [exiting, setExiting] = useState(false)
   const done = useRef(false)
 

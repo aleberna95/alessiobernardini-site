@@ -103,10 +103,11 @@ const offerCardVariants = {
 }
 
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches
+  )
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 639px)')
-    setIsMobile(mq.matches)
     const h = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     mq.addEventListener('change', h)
     return () => mq.removeEventListener('change', h)
@@ -119,10 +120,10 @@ export default function Services() {
   const t = useT(lang)
   const [expandedService, setExpandedService] = useState<string | null>(null)
   const [offers, setOffers] = useState<PublicOffer[]>([])
-  const [loadingOffers, setLoadingOffers] = useState(false)
   const [fetchedOnce, setFetchedOnce] = useState(false)
   const [leadOffer, setLeadOffer] = useState<PublicOffer | null>(null)
   const isMobile = useIsMobile()
+  const loadingOffers = expandedService !== null && !fetchedOnce
 
   // Lock body scroll when bottom sheet is open on mobile
   useEffect(() => {
@@ -137,15 +138,11 @@ export default function Services() {
   // Fetch offers on first expand
   useEffect(() => {
     if (!expandedService || fetchedOnce) return
-    setLoadingOffers(true)
     fetch(`${CRM_API_URL}/api/public/offers`)
       .then((res) => res.ok ? res.json() : Promise.reject())
       .then((json) => setOffers(json.data ?? []))
       .catch(() => setOffers([]))
-      .finally(() => {
-        setLoadingOffers(false)
-        setFetchedOnce(true)
-      })
+      .finally(() => setFetchedOnce(true))
   }, [expandedService, fetchedOnce])
 
   function handleToggle(serviceId: string) {
