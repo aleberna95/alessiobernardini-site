@@ -99,6 +99,7 @@ export interface Translation {
   }
   footer: {
     copyright: string
+    privacy: string
   }
 }
 
@@ -220,6 +221,7 @@ const translations: Record<Lang, Translation> = {
     },
     footer: {
       copyright: `© ${new Date().getFullYear()} Alessio Bernardini — P.IVA 02607070444`,
+      privacy: 'Privacy',
     },
   },
   en: {
@@ -339,6 +341,7 @@ const translations: Record<Lang, Translation> = {
     },
     footer: {
       copyright: `© ${new Date().getFullYear()} Alessio Bernardini — VAT 02607070444`,
+      privacy: 'Privacy',
     },
   },
 }
