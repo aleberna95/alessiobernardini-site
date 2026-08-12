@@ -233,6 +233,16 @@ export const sites: Site[] = [
     },
     year: '2026',
   },
+  {
+    id: 'sagreora',
+    name: 'sagreora.it',
+    url: 'https://sagreora.it',
+    description: {
+      it: 'Portale che raccoglie sagre e feste paesane in Marche, Abruzzo, Molise e Lazio.',
+      en: 'Directory of local food festivals and village celebrations across Central Italy.',
+    },
+    year: '2026',
+  },
 ]
 
 // --- STATS ---
