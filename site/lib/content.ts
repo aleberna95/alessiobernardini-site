@@ -224,16 +224,6 @@ export const sites: Site[] = [
     year: '2026',
   },
   {
-    id: 'alessiobernardini',
-    name: 'alessiobernardini.dev',
-    url: 'https://alessiobernardini.dev',
-    description: {
-      it: 'Sito personale e portfolio professionale.',
-      en: 'Personal site and professional portfolio.',
-    },
-    year: '2026',
-  },
-  {
     id: 'sagreora',
     name: 'sagreora.it',
     url: 'https://sagreora.it',
