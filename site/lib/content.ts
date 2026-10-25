@@ -218,8 +218,8 @@ export const sites: Site[] = [
     name: 'colleiano.it',
     url: 'https://colleiano.it',
     description: {
-      it: 'Sito web per il Comune di Colleiano.',
-      en: 'Website for the Municipality of Colleiano.',
+      it: 'Sito e gestionale delle feste di Colleiano: task e spese per il comitato, programma e mappa per i visitatori.',
+      en: 'Website and management tool for the Colleiano festivals: tasks and expenses for the committee, schedule and map for visitors.',
     },
     year: '2026',
   },
